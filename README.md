@@ -8,3 +8,8 @@ Command line animations based on the state of the system
 - Use https://www.text-image.com/convert/ to create ascii frames based on previously created image frames
 
 - Locate the images and ascii frames in assets directory
+
+
+### clean.sh
+
+Use clean.sh file for cleaning undesired characters from the ascii frames
