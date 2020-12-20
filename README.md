@@ -1,6 +1,8 @@
 # shell-emotions
 Command line animations based on the state of the system
 
+![](assets/docs/eyes.png)
+
 ## Workflow for getting the ascii frames
 
 - Use https://ezgif.com/split to split desired gif animation into frames
