@@ -71,7 +71,7 @@ def emote(thread_name):
                 time.sleep(0.2)
 
 def shutdown(signum, frame):
-    print("SHUTDOWN SIGNAL RECIEVED: %d" % signum)
+    print(" Shutting Down...")
     sys.exit(0)
 
 def main():
@@ -81,8 +81,8 @@ def main():
     # Starting threads
     util_thread = Thread(target=check_usage, args=("UTILIZATION CHECK THREAD",))
     emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD",))
-    util_thread.daemon = True
-    emote_thread.daemon = True
+    util_thread.setDaemon(True)
+    emote_thread.setDaemon(True)
 
     util_thread.start()
     emote_thread.start()
