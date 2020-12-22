@@ -36,7 +36,7 @@ for i in range(5): # Setting up Asleep frames
 
 
 # Method to refresh utilization values
-def check_usage(thread_name):
+def state_update(thread_name):
     global state
     while True:
         cpu_percent = psutil.cpu_percent(1)
@@ -84,7 +84,7 @@ def main():
     signal.signal(signal.SIGINT, shutdown)
 
     # Starting threads
-    util_thread = Thread(target=check_usage, args=("UTILIZATION CHECK THREAD",))
+    util_thread = Thread(target=state_update, args=("UTILIZATION CHECK THREAD",))
     emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD",))
     util_thread.setDaemon(True)
     emote_thread.setDaemon(True)
