@@ -4,19 +4,19 @@ from threading import Thread
 import signal
 import sys
 
-# Importing frames and Initializing file paths
+
+# Importing frames and Initializing file paths and global state
 files   = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
 frames  = []
 sleepy_frames = []
 awake_frames = []
 sleepy_ind = [0, 7]
 awake_ind = [0, 1, 4, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 5, 6, 7]
-cpu_percent = 0
 state = 0
-terminate_flag = 0
 frames_path = "./assets/frames/"
 working_dir = os.path.dirname(__file__)
 
+# Opening files and setting up animation frame arrays
 for name in files:
     filepath = frames_path + name
     print(filepath)
@@ -27,16 +27,16 @@ for name in files:
         #append list f to list frames
         frames.append(f)
 
-for ind in awake_ind:
+for ind in awake_ind: # Setting up Awake frames
     awake_frames.append(frames[ind])
 
-for i in range(5):
+for i in range(5): # Setting up Asleep frames
     for ind in sleepy_ind:
         sleepy_frames.append(frames[ind])
 
+
 # Method to refresh utilization values
 def check_usage(thread_name):
-    global cpu_percent
     global state
     while True:
         cpu_percent = psutil.cpu_percent(1)
@@ -47,6 +47,7 @@ def check_usage(thread_name):
         elif (cpu_percent >= 30): # Fully Awake
             state = 2
         time.sleep(5)
+
 
 # Method to print and update emotion animation
 def emote(thread_name):
@@ -64,16 +65,20 @@ def emote(thread_name):
                 #print(" TEST ")
                 time.sleep(0.2)
                 #clear the shell
-        elif (state == 2):
+        elif (state == 2): # Awake
             for frame in awake_frames:
                 os.system('printf "\033c"')
                 print("".join(frame))
                 time.sleep(0.2)
 
+
+# Method to shutdown program
 def shutdown(signum, frame):
     print(" Shutting Down...")
     sys.exit(0)
 
+
+# Main function to handle signals and start threads
 def main():
     signal.signal(signal.SIGTERM, shutdown)
     signal.signal(signal.SIGINT, shutdown)
