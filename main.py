@@ -1,6 +1,8 @@
 import os , time
 import psutil
 from threading import Thread
+import signal
+import sys
 
 # Importing frames and Initializing file paths
 files   = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
@@ -11,6 +13,7 @@ sleepy_ind = [0, 7]
 awake_ind = [0, 1, 4, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 5, 6, 7]
 cpu_percent = 0
 state = 0
+terminate_flag = 0
 frames_path = "./assets/frames/"
 working_dir = os.path.dirname(__file__)
 
@@ -67,9 +70,24 @@ def emote(thread_name):
                 print("".join(frame))
                 time.sleep(0.2)
 
-# Starting threads
-util_thread = Thread(target=check_usage, args=("UTILIZATION CHECK THREAD",))
-emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD",))
+def shutdown(signum, frame):
+    print("SHUTDOWN SIGNAL RECIEVED: %d" % signum)
+    sys.exit(0)
 
-util_thread.start()
-emote_thread.start()
+def main():
+    signal.signal(signal.SIGTERM, shutdown)
+    signal.signal(signal.SIGINT, shutdown)
+
+    # Starting threads
+    util_thread = Thread(target=check_usage, args=("UTILIZATION CHECK THREAD",))
+    emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD",))
+    util_thread.daemon = True
+    emote_thread.daemon = True
+
+    util_thread.start()
+    emote_thread.start()
+    util_thread.join()
+    emote_thread.join()
+
+if __name__ == "__main__":
+    main()
