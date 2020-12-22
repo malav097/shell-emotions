@@ -10,6 +10,7 @@ files   = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
 frames  = []
 sleepy_frames = []
 awake_frames = []
+rage_frames = []
 sleepy_ind = [0, 7]
 awake_ind = [0, 1, 4, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 5, 6, 7]
 state = 0
@@ -27,6 +28,16 @@ for name in files:
         #append list f to list frames
         frames.append(f)
 
+for i in range(18):
+    filepath = frames_path + "rage/" + str(i)
+    print(filepath)
+    rel_path = os.path.relpath(filepath, working_dir)
+    with open(rel_path, "r", encoding="utf8") as f:
+        #sabe every line in list "f"
+        f = f.readlines()
+        #append list f to list frames
+        rage_frames.append(f)
+
 for ind in awake_ind: # Setting up Awake frames
     awake_frames.append(frames[ind])
 
@@ -42,10 +53,12 @@ def state_update(thread_name):
         cpu_percent = psutil.cpu_percent(1)
         if (cpu_percent <= 10): # Sleepy Animation
             state = 0
-        elif (cpu_percent > 10 and cpu_percent < 30): # Waking Up
+        elif (cpu_percent > 10 and cpu_percent <= 30): # Waking Up
             state = 1
-        elif (cpu_percent >= 30): # Fully Awake
+        elif (cpu_percent > 30 and cpu_percent <= 90): # Fully Awake
             state = 2
+        elif (cpu_percent > 90): # Rage
+            state = 3
         time.sleep(5)
 
 
@@ -70,6 +83,11 @@ def emote(thread_name):
                 os.system('printf "\033c"')
                 print("".join(frame))
                 time.sleep(0.2)
+        elif (state == 3): # Rage
+            for frame in rage_frames:
+                os.system('printf "\033c"')
+                print("".join(frame))
+                time.sleep(0.2)
 
 
 # Method to shutdown program
@@ -84,7 +102,7 @@ def main():
     signal.signal(signal.SIGINT, shutdown)
 
     # Starting threads
-    util_thread = Thread(target=state_update, args=("UTILIZATION CHECK THREAD",))
+    util_thread = Thread(target=state_update, args=("STATE UPDATE THREAD",))
     emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD",))
     util_thread.setDaemon(True)
     emote_thread.setDaemon(True)
