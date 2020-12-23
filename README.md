@@ -13,11 +13,9 @@ Command line animations based on the state of the system
 
 ## Adding Animations
 
- - Take ascii frames numbered from 0-n
- - Place ascii frames in filepath `assets/frames/[insert_animation_name]`
- - Create loop from 0-n that concates filepath with `i` and appends frames to frame array
- - Add state value to represent emotion in `state_update(thread_name):`
- - Add conditional run of animation in `emote(thread_name):` using new frame array
+ - Create ascii frames using above workflow or modified Termimium from https://github.com/avanishsubbiah/termimation-save-frames
+ - Move ascii frames named 0-N to `./assets/frames/<insert_emotion_name>`
+ - Add `<insert_emotion_name>` to `emotions_names` in `main.py`
 
 ## Requirements
 
@@ -56,3 +54,12 @@ main():
 ```
 
 The main function deals with signal handling and starts both state update and emote threads.
+
+### Classes
+
+```
+class Animation:
+```
+
+The `Animation` class has the properties `name`, `id`, `file_path`, and `frames`. 
+It will fill `frames` list upon initialization using input `file_path` and `name`.
