@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os , time
 import psutil
 from threading import Thread
@@ -40,6 +42,12 @@ def check_usage(thread_name):
         flag_busy = 0
         time.sleep(5)
 
+def runanim(anim):
+    for frame in anim:
+        print('\033c')
+        print("".join(frame))
+        time.sleep(0.2)
+
 # Method to print and update emotion animation
 def emote(thread_name):
     prev_state = 0
@@ -55,26 +63,12 @@ def emote(thread_name):
                 state = 2
         
         if (state == 0): # Sleepy Animation
-            for frame in sleepy_frames:
-                os.system('printf "\033c"')
-                print("".join(frame))
-                time.sleep(0.2)
-            prev_state = 0
+            runanim(sleepy_frames)
         elif (state == 1): # Waking Up
-            for frame in frames:
-                #clear the shell
-                os.system('printf "\033c"') #printf "\033c"') 
-                print("".join(frame))
-                #print(" TEST ")
-                time.sleep(0.2)
-                #clear the shell
-            prev_state = 1
+            runanim(frames)
         elif (state == 2):
-            for frame in awake_frames:
-                os.system('printf "\033c"')
-                print("".join(frame))
-                time.sleep(0.2)
-            prev_state = 2
+            runanim(awake_frames)
+        prev_state = state
 
 # Starting threads
 util_thread = Thread(target=check_usage, args=("UTILIZATION CHECK THREAD",))
