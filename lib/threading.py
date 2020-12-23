@@ -15,7 +15,7 @@ def state_update(thread_name):
             state = emotions["awake"].id
         elif (cpu_percent > 90): # Rage
             state = emotions["rage"].id
-        time.sleep(5)
+        time.sleep(util_refresh)
 
 
 # Method to print frames given a key
@@ -24,7 +24,7 @@ def print_frames(key):
     for frame in frames:
         print('\033c')
         print("".join(frame))
-        time.sleep(0.2)
+        time.sleep(frame_time)
 
 
 # Method to print and update emotion animation
