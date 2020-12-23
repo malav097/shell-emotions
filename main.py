@@ -1,4 +1,4 @@
-import os , time, psutil, signal, sys
+import time, psutil, signal, sys
 from threading import Thread
 from lib.animation import Animation
 
@@ -30,7 +30,7 @@ def state_update(thread_name):
 def print_frames(key):
     frames = emotions[key].frames
     for frame in frames:
-        os.system('printf "\033c"')
+        print('\033c')
         print("".join(frame))
         time.sleep(0.2)
 
