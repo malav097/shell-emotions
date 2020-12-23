@@ -29,10 +29,10 @@ Command line animations based on the state of the system for Linux or Windows 10
 
 Configurable Parameters in ./conf/cfg.py:
 
- - frames_path | This is the path of the frames folder where individual folders for each emotion is kept (Default "./assets/frames/")
- - state | This is the starting state of the program (Default 0)
- - frame_time | The time before printing next frame (Default 0.2)
- - util_refresh | Time inbetween utilization stat refreshes (Default 5)
+ - `frames_path` | This is the path of the frames folder where individual folders for each emotion is kept (Default "./assets/frames/")
+ - `state` | This is the starting state of the program (Default 0)
+ - `frame_time` | The time before printing next frame (Default 0.2)
+ - `util_refresh` | Time inbetween utilization stat refreshes (Default 5)
 
 ## clean.sh
 
