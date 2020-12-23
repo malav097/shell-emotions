@@ -7,13 +7,13 @@ def state_update(thread_name):
     global state
     while True:
         cpu_percent = psutil.cpu_percent(1)
-        if (cpu_percent <= 10): # Sleep
+        if (cpu_percent <= cpu_lvl_1): # Sleep
             state = emotions["sleep"].id
-        elif (cpu_percent > 10 and cpu_percent <= 30): # Waking
+        elif (cpu_percent > cpu_lvl_1 and cpu_percent <= cpu_lvl_2): # Waking
             state = emotions["waking"].id
-        elif (cpu_percent > 30 and cpu_percent <= 90): # Awake
+        elif (cpu_percent > cpu_lvl_2 and cpu_percent <= cpu_lvl_3): # Awake
             state = emotions["awake"].id
-        elif (cpu_percent > 90): # Rage
+        elif (cpu_percent > cpu_lvl_3): # Rage
             state = emotions["rage"].id
         time.sleep(util_refresh)
 
