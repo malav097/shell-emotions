@@ -1,7 +1,7 @@
 # shell-emotions
 Command line animations based on the state of the system
 
-![](assets/docs/eyes.png)
+![](assets/docs/example_eyes.gif)
 
 ## Workflow for getting the ascii frames
 
