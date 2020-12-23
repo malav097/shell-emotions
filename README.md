@@ -33,6 +33,9 @@ Configurable Parameters in ./conf/cfg.py:
  - `state` | This is the starting state of the program (Default 0)
  - `frame_time` | The time before printing next frame (Default 0.2)
  - `util_refresh` | Time inbetween utilization stat refreshes (Default 5)
+ - `cpu_lvl_1` | Boundary for low CPU usage (Default 10)
+ - `cpu_lvl_2` | Boundary for medium CPU usage (Default 30)
+ - `cpu_lvl_3` | Boundary for high CPU usage (Default 90)
 
 ## clean.sh
 
