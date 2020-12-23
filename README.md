@@ -3,6 +3,8 @@ Command line animations based on the state of the system for Linux or Windows 10
 
 ![](assets/docs/example_eyes.gif)
 
+**NOTE: If you are using Powershell on Windows 10 you MUST use `Ctrl-BREAK` to terminate the application**
+
 ## Workflow for getting the ascii frames
 
 - Use https://ezgif.com/split to split desired gif animation into frames
