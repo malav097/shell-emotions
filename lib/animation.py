@@ -1,5 +1,3 @@
-import os
-
 # Class for animation objects
 class Animation:
     def __init__(self, name, id, file_path):
