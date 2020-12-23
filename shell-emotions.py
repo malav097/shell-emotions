@@ -1,4 +1,4 @@
-import os, time, psutil, signal, sys
+import os, signal, sys
 from threading import Thread
 from lib.animation import Animation
 from lib.threading import *
