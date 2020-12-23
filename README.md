@@ -1,5 +1,5 @@
 # shell-emotions
-Command line animations based on the state of the system
+Command line animations based on the state of the system for Linux or Windows 10
 
 ![](assets/docs/example_eyes.gif)
 
@@ -21,7 +21,7 @@ Command line animations based on the state of the system
 
  - Python 2 or 3
  - psutil
- - bash/fish shell (Powershell will NOT work as of now)
+ - Bash, Fish, or Powershell
 
 ## clean.sh
 
