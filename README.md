@@ -17,7 +17,7 @@ Command line animations based on the state of the system for Linux or Windows 10
 
  - Create ascii frames using above workflow or modified Termimium from https://github.com/avanishsubbiah/termimation-save-frames
  - Move ascii frames named 0-N to `./assets/frames/<insert_emotion_name>`
- - Add `<insert_emotion_name>` to `emotions_names` in `main.py`
+ - Add conditional in `state_update()` in lib.threading that sets `state = emotions["<insert_emotion_name>"].id`
 
 ## Requirements
 
