@@ -57,6 +57,7 @@ def main():
     for i in range(len(emotion_names)):
         emotions.update({emotion_names[i] : Animation(emotion_names[i], i, frames_path)})
 
+    # Starting threads
     util_thread = Thread(target=state_update, args=("STATE UPDATE THREAD",))
     emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD",))
     util_thread.setDaemon(True)
