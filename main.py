@@ -1,13 +1,12 @@
-import time, psutil, signal, sys
+import os, time, psutil, signal, sys
 from threading import Thread
 from lib.animation import Animation
 
 
 # Importing frames and Initializing file paths and global state
-emotion_names = ["sleep", "waking", "awake", "rage"]
+frames_path = "./assets/frames/"
 emotions = {}
 state = 0
-frames_path = "./assets/frames/"
 
 
 # Method to refresh utilization values
@@ -54,6 +53,7 @@ def main():
     signal.signal(signal.SIGTERM, shutdown)
     signal.signal(signal.SIGINT, shutdown)
 
+    emotion_names = os.listdir(frames_path)
     for i in range(len(emotion_names)):
         emotions.update({emotion_names[i] : Animation(emotion_names[i], i, frames_path)})
 
