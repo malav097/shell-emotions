@@ -1,5 +1,6 @@
+#!/bin/sh
 # use this for cleaning the frames removing undesired symbols
 
 for filename in ./*; do
-    cat $filename | sed 's/`/ /g' | sed 's/-/ /g' | sed 's/\./ /g' | sed 's/:/ /g' > $filename
+    sed -i 's/`/ /g;s/-/ /g;s/\./ /g;s/:/ /g' $filename
 done
