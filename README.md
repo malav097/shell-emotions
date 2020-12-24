@@ -5,6 +5,8 @@ Command line animations based on the state of the system for Linux or Windows 10
 
 **NOTE: If you are using Powershell on Windows 10 you MUST use `Ctrl-BREAK` to terminate the application**
 
+**The ascii animations were created using a modified version of [Joedang's converter](https://github.com/Joedang/termimation)**
+
 ## Workflow for getting the ascii frames
 
 - Use https://ezgif.com/split to split desired gif animation into frames
@@ -46,6 +48,22 @@ Use clean.sh file for cleaning undesired characters from the ascii frames
 ### Functions
 
 ```
+shutdown(signum, frame):
+```
+
+The shutdown function handles clean shutdown of the program with "Shutting down..." printout.
+
+```
+main():
+```
+
+The main function deals with signal handling and starts both state update and emote threads.
+
+## threading.py
+
+### Functions
+
+```
 state_update(thread_name):
 ```
 
@@ -57,17 +75,7 @@ emote(thread_name):
 
 The emote thread is a daemon that runs the correct animation based on `state` continuously.
 
-```
-shutdown(signum, frame):
-```
-
-The shutdown function handles clean shutdown of the program with "Shutting down..." printout.
-
-```
-main():
-```
-
-The main function deals with signal handling and starts both state update and emote threads.
+## animation.py
 
 ### Classes
 
