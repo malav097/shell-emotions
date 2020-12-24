@@ -1,7 +1,9 @@
 # shell-emotions
-Command line animations based on the state of the system
+Command line animations based on the state of the system for Linux or Windows 10
 
 ![](assets/docs/example_eyes.gif)
+
+**NOTE: If you are using Powershell on Windows 10 you MUST use `Ctrl-BREAK` to terminate the application**
 
 ## Workflow for getting the ascii frames
 
@@ -13,17 +15,27 @@ Command line animations based on the state of the system
 
 ## Adding Animations
 
- - Take ascii frames numbered from 0-n
- - Place ascii frames in filepath `assets/frames/[insert_animation_name]`
- - Create loop from 0-n that concates filepath with `i` and appends frames to frame array
- - Add state value to represent emotion in `state_update(thread_name):`
- - Add conditional run of animation in `emote(thread_name):` using new frame array
+ - Create ascii frames using above workflow or modified Termimium from https://github.com/avanishsubbiah/termimation-save-frames
+ - Move ascii frames named 0-N to `./assets/frames/<insert_emotion_name>`
+ - Add conditional in `state_update()` in lib.threading that sets `state = emotions["<insert_emotion_name>"].id`
 
 ## Requirements
 
  - Python 2 or 3
  - psutil
- - bash/fish shell (Powershell will NOT work as of now)
+ - Bash, Fish, or Powershell
+
+## Configuration
+
+Configurable Parameters in ./conf/cfg.py:
+
+ - `frames_path` | This is the path of the frames folder where individual folders for each emotion is kept (Default "./assets/frames/")
+ - `state` | This is the starting state of the program (Default 0)
+ - `frame_time` | The time before printing next frame (Default 0.2)
+ - `util_refresh` | Time inbetween utilization stat refreshes (Default 5)
+ - `cpu_lvl_1` | Boundary for low CPU usage (Default 10)
+ - `cpu_lvl_2` | Boundary for medium CPU usage (Default 30)
+ - `cpu_lvl_3` | Boundary for high CPU usage (Default 90)
 
 ## clean.sh
 
@@ -56,3 +68,12 @@ main():
 ```
 
 The main function deals with signal handling and starts both state update and emote threads.
+
+### Classes
+
+```
+class Animation:
+```
+
+The `Animation` class has the properties `name`, `id`, `file_path`, and `frames`. 
+It will fill `frames` list upon initialization using input `file_path` and `name`.

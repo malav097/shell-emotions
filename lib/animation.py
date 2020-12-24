@@ -1,30 +1,18 @@
-import time
-import sys
-from lib import emotions
-from lib import statemanager
+import os
 
+# Class for animation objects
+class Animation:
+    def __init__(self, name, id, file_path):
+        self.name = name
+        self.id = id
+        self.file_path = file_path + name + "/"
+        self.frames = []
 
-
-class animation:
-    
-    def run(self):
-        def animate(emotion):
-            for frame in emotion:
-                print('\033c')
-                print("".join(frame))
-                time.sleep(0.2)
-        emotion = emotions.emotions()
-        
-        while True:
-            if (statemanager.state == 0): # Sleepy Animation
-                animate(emotion.sleepy)
-
-            elif (statemanager.state == 1): # Waking Up
-                animate(emotion.frames)
-
-            elif (statemanager.state == 2): # Awake
-                animate(emotion.awake)
-
-            elif (statemanager.state == 3): # Rage
-
-                animate(emotion.rage)
+        for i in range(len(os.listdir(self.file_path))):
+            iter_path = self.file_path + str(i)
+            print(iter_path)
+            with open(iter_path, "r", encoding="utf8") as f:
+                #sabe every line in list "f"
+                f = f.readlines()
+                #append list f to list frames
+                self.frames.append(f)
