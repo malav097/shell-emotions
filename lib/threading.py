@@ -23,7 +23,7 @@ def state_update(thread_name):
 def print_frames(key):
     frames = emotions[key].frames
     for frame in frames:
-        print('\033c', end="")
+        print('\033c')
         print("".join(frame))
         time.sleep(frame_time)
 
