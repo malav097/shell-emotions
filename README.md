@@ -30,17 +30,17 @@ Command line animations based on the state of the system for Linux or Windows 10
 
 Configurable Parameters in ./conf/cfg.py:
 
- - `frames_path` | This is the path of the frames folder where individual folders for each emotion is kept (Default "./assets/frames/")
- - `state` | This is the starting state of the program (Default 0)
- - `welcome_time` | Time (sec) for welcome message (Default 1)
- - `frame_time` | The time before printing next frame (Default 0.2)
- - `util_refresh` | Time inbetween utilization stat refreshes (Default 5)
- - `cpu_lvl_1` | Boundary for low CPU usage (Default 10)
- - `cpu_lvl_2` | Boundary for medium CPU usage (Default 30)
- - `cpu_lvl_3` | Boundary for high CPU usage (Default 90)
- - `cpu_temp_bound` | Boundary for high CPU temperature (Default 80)
- - `cpu_temp_bound` | Sensor to pull CPU Temps from (Default 'coretemp')
- - `mem_bound` | Boundary for high memory usage (Default 50)
+ - `frames_path` | This is the path of the frames folder where individual folders for each emotion is kept **(Default "./assets/frames/")**
+ - `state` | This is the starting state of the program **(Default 0)**
+ - `welcome_time` | Time (sec) for welcome message **(Default 1)**
+ - `frame_time` | The time before printing next frame **(Default 0.2)**
+ - `util_refresh` | Time inbetween utilization stat refreshes **(Default 5)**
+ - `cpu_lvl_1` | Boundary for low CPU usage **(Default 10)**
+ - `cpu_lvl_2` | Boundary for medium CPU usage **(Default 30)**
+ - `cpu_lvl_3` | Boundary for high CPU usage **(Default 90)**
+ - `cpu_temp_bound` | Boundary for high CPU temperature **(Default 80)**
+ - `cpu_temp_bound` | Sensor to pull CPU Temps from **(Default 'coretemp')**
+ - `mem_bound` | Boundary for high memory usage **(Default 50)**
 
 ## clean.sh
 
