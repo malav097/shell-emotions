@@ -19,7 +19,6 @@ def get_cpu_temp():
         return avg_cpu_temp
     elif (platform == "win32"):
         try:
-            import wmi
             w = wmi.WMI(namespace=r'root\wmi')
             temp = w.MSAcpi_ThermalZoneTemperature()[0].CurrentTemperature
             cpu_temp = (temp / 10) - 273.15
@@ -33,10 +32,19 @@ def get_cpu_temp():
 # Method to refresh utilization values
 def state_update(thread_name, emotions):
     global state
+    disable_cpu_temp = False
+    if (platform == "win32"):
+        try:
+            import wmi
+        except:
+            disable_cpu_temp = True
     while True:
         cpu_percent = psutil.cpu_percent(cpu_usage_time)
         mem_percent = psutil.virtual_memory().percent
-        cpu_temp = get_cpu_temp()
+        if (disable_cpu_temp):
+            cpu_temp = 0
+        else:
+            cpu_temp = get_cpu_temp()
         if (cpu_temp > cpu_temp_bound):
             state = emotions["embarrassed"].id
         else:
