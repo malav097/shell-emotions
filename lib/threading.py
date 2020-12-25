@@ -1,3 +1,4 @@
+from __future__ import print_function
 from conf.cfg import *
 import time
 import psutil
@@ -23,7 +24,7 @@ def state_update(thread_name):
 def print_frames(key):
     frames = emotions[key].frames
     for frame in frames:
-        print('\033c')
+        print('\033c', end="")
         print("".join(frame))
         time.sleep(frame_time)
 

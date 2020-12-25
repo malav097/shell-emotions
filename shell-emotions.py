@@ -28,8 +28,10 @@ def main():
 
     util_thread.start()
     emote_thread.start()
-    util_thread.join()
-    emote_thread.join()
+    #util_thread.join()
+    #emote_thread.join()
+    while True:
+        signal.pause()
 
 
 if __name__ == "__main__":

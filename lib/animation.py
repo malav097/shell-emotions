@@ -1,3 +1,4 @@
+from io import open
 import os
 
 # Class for animation objects
