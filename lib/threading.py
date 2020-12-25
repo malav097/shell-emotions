@@ -1,6 +1,7 @@
 from conf.cfg import *
 import time
 import psutil
+import sys
 
 # Method to refresh utilization values
 def state_update(thread_name):
@@ -22,7 +23,7 @@ def state_update(thread_name):
 def print_frames(key):
     frames = emotions[key].frames
     for frame in frames:
-        print('\033c')
+        print('\033c', end="")
         print("".join(frame))
         time.sleep(frame_time)
 
