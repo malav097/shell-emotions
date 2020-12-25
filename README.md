@@ -26,6 +26,7 @@ Command line animations based on the state of the system for Linux or Windows 10
  - Python 2 or 3
  - psutil
  - Bash, Fish, or Powershell
+ - wmi **Requires Admin Privilages** | (if you want cpu temps on Windows 10)
 
 ## Configuration
 
@@ -38,6 +39,9 @@ Configurable Parameters in ./conf/cfg.py:
  - `cpu_lvl_1` | Boundary for low CPU usage (Default 10)
  - `cpu_lvl_2` | Boundary for medium CPU usage (Default 30)
  - `cpu_lvl_3` | Boundary for high CPU usage (Default 90)
+ - `cpu_temp_bound` | Boundary for high CPU temperature (Default 80)
+ - `cpu_temp_bound` | Sensor to pull CPU Temps from (Default 'coretemp')
+ - `mem_bound` | Boundary for high memory usage (Default 50)
 
 ## clean.sh
 
