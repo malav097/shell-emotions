@@ -3,8 +3,6 @@ Command line animations based on the state of the system for Linux or Windows 10
 
 ![](assets/docs/eyes_example.gif)
 
-**NOTE: If you are using Powershell on Windows 10 you MUST use `Ctrl-BREAK` to terminate the application**
-
 **The ascii animations were created using a modified version of [Joedang's converter](https://github.com/Joedang/termimation)**
 
 ## Workflow for getting the ascii frames
