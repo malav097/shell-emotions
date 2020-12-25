@@ -13,9 +13,11 @@ def shutdown(signum, frame):
 
 # Main function to handle signals and start threads
 def main():
+    # Catching SIGINT and SIGTERM signals
     signal.signal(signal.SIGTERM, shutdown)
     signal.signal(signal.SIGINT, shutdown)
 
+    # Loading emotions and frames into emotions dictionary
     emotions = {}
     emotion_names = os.listdir(frames_path)
     for i in range(len(emotion_names)):
@@ -30,6 +32,7 @@ def main():
     util_thread.start()
     emote_thread.start()
 
+    # Keeping main thread active for signal handling
     while True:
         signal.pause()
 
