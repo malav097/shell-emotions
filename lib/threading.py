@@ -34,7 +34,7 @@ def get_cpu_temp():
 def state_update(thread_name, emotions):
     global state
     while True:
-        cpu_percent = psutil.cpu_percent(1)
+        cpu_percent = psutil.cpu_percent(cpu_usage_time)
         mem_percent = psutil.virtual_memory().percent
         cpu_temp = get_cpu_temp()
         if (cpu_temp > cpu_temp_bound):

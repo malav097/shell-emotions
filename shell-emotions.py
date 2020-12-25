@@ -2,11 +2,13 @@ import os, signal, sys
 from threading import Thread
 from lib.animation import Animation
 from lib.threading import *
+from lib.welcome import print_welcome
 from conf.cfg import *
 
 
 # Method to shutdown program
 def shutdown(signum, frame):
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(" Shutting Down...")
     sys.exit(0)
 
@@ -22,6 +24,9 @@ def main():
     emotion_names = os.listdir(frames_path)
     for i in range(len(emotion_names)):
         emotions.update({emotion_names[i] : Animation(emotion_names[i], i, frames_path)})
+
+    print_welcome()
+    time.sleep(welcome_time)
 
     # Starting threads
     util_thread = Thread(target=state_update, args=("STATE UPDATE THREAD", emotions))
