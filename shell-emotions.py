@@ -33,8 +33,12 @@ def main():
     emote_thread.start()
 
     # Keeping main thread active for signal handling
-    while True:
-        signal.pause()
+    try:
+        while True:
+            signal.pause()
+    except AttributeError: # Windows lacks .pause()
+        while True:
+            time.sleep(1)
 
 
 if __name__ == "__main__":
