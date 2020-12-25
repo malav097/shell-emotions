@@ -16,20 +16,20 @@ def main():
     signal.signal(signal.SIGTERM, shutdown)
     signal.signal(signal.SIGINT, shutdown)
 
+    emotions = {}
     emotion_names = os.listdir(frames_path)
     for i in range(len(emotion_names)):
         emotions.update({emotion_names[i] : Animation(emotion_names[i], i, frames_path)})
 
     # Starting threads
-    util_thread = Thread(target=state_update, args=("STATE UPDATE THREAD",))
-    emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD",))
+    util_thread = Thread(target=state_update, args=("STATE UPDATE THREAD", emotions))
+    emote_thread = Thread(target=emote, args=("EMOTION PRINT THREAD", emotions))
     util_thread.setDaemon(True)
     emote_thread.setDaemon(True)
 
     util_thread.start()
     emote_thread.start()
-    #util_thread.join()
-    #emote_thread.join()
+
     while True:
         signal.pause()
 

@@ -5,7 +5,7 @@ import psutil
 import sys
 
 # Method to refresh utilization values
-def state_update(thread_name):
+def state_update(thread_name, emotions):
     global state
     while True:
         cpu_percent = psutil.cpu_percent(1)
@@ -21,7 +21,7 @@ def state_update(thread_name):
 
 
 # Method to print frames given a key
-def print_frames(key):
+def print_frames(key, emotions):
     frames = emotions[key].frames
     for frame in frames:
         print('\033c', end="")
@@ -30,8 +30,8 @@ def print_frames(key):
 
 
 # Method to print and update emotion animation
-def emote(thread_name):
+def emote(thread_name, emotions):
     while True:
         for key, val in emotions.items():
             if (state == val.id):
-                print_frames(key)
+                print_frames(key, emotions)
