@@ -1,3 +1,5 @@
 .DS_Store
-__pycache__/
-*.py[cod]
+lib/__pycache__/
+lib/*.py[cod]
+conf/__pycache__/
+conf/*.py[cod]
