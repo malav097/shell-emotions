@@ -1,9 +1,9 @@
 # shell-emotions
 Command line animations based on the state of the system for Linux or Windows 10
 
-![](assets/docs/example_eyes.gif)
+![](assets/docs/eyes_example.gif)
 
-**NOTE: If you are using Powershell on Windows 10 you MUST use `Ctrl-BREAK` to terminate the application**
+**The ascii animations were created using a modified version of [Joedang's converter](https://github.com/Joedang/termimation)**
 
 ## Workflow for getting the ascii frames
 
@@ -24,24 +24,45 @@ Command line animations based on the state of the system for Linux or Windows 10
  - Python 2 or 3
  - psutil
  - Bash, Fish, or Powershell
+ - wmi **Requires Admin Privilages** | (if you want cpu temps on Windows 10)
 
 ## Configuration
 
 Configurable Parameters in ./conf/cfg.py:
 
- - `frames_path` | This is the path of the frames folder where individual folders for each emotion is kept (Default "./assets/frames/")
- - `state` | This is the starting state of the program (Default 0)
- - `frame_time` | The time before printing next frame (Default 0.2)
- - `util_refresh` | Time inbetween utilization stat refreshes (Default 5)
- - `cpu_lvl_1` | Boundary for low CPU usage (Default 10)
- - `cpu_lvl_2` | Boundary for medium CPU usage (Default 30)
- - `cpu_lvl_3` | Boundary for high CPU usage (Default 90)
+ - `frames_path` | This is the path of the frames folder where individual folders for each emotion is kept **(Default "./assets/frames/")**
+ - `state` | This is the starting state of the program **(Default 0)**
+ - `welcome_time` | Time (sec) for welcome message **(Default 1)**
+ - `frame_time` | The time before printing next frame **(Default 0.2)**
+ - `util_refresh` | Time inbetween utilization stat refreshes **(Default 5)**
+ - `cpu_lvl_1` | Boundary for low CPU usage **(Default 10)**
+ - `cpu_lvl_2` | Boundary for medium CPU usage **(Default 30)**
+ - `cpu_lvl_3` | Boundary for high CPU usage **(Default 90)**
+ - `cpu_temp_bound` | Boundary for high CPU temperature **(Default 80)**
+ - `cpu_temp_bound` | Sensor to pull CPU Temps from **(Default 'coretemp')**
+ - `mem_bound` | Boundary for high memory usage **(Default 50)**
 
 ## clean.sh
 
 Use clean.sh file for cleaning undesired characters from the ascii frames
 
 ## main.py
+
+### Functions
+
+```
+shutdown(signum, frame):
+```
+
+The shutdown function handles clean shutdown of the program with "Shutting down..." printout.
+
+```
+main():
+```
+
+The main function deals with signal handling and starts both state update and emote threads.
+
+## threading.py
 
 ### Functions
 
@@ -57,17 +78,7 @@ emote(thread_name):
 
 The emote thread is a daemon that runs the correct animation based on `state` continuously.
 
-```
-shutdown(signum, frame):
-```
-
-The shutdown function handles clean shutdown of the program with "Shutting down..." printout.
-
-```
-main():
-```
-
-The main function deals with signal handling and starts both state update and emote threads.
+## animation.py
 
 ### Classes
 

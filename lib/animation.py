@@ -1,3 +1,4 @@
+from io import open
 import os
 
 # Class for animation objects
@@ -10,7 +11,7 @@ class Animation:
 
         for i in range(len(os.listdir(self.file_path))):
             iter_path = self.file_path + str(i)
-            print(iter_path)
+            #print(iter_path)
             with open(iter_path, "r", encoding="utf8") as f:
                 #sabe every line in list "f"
                 f = f.readlines()
