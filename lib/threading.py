@@ -42,19 +42,25 @@ def state_update(thread_name, emotions):
             cpu_temp = cpu_temp_default
         else:
             cpu_temp = get_cpu_temp(handle)
-        if (cpu_temp > cpu_temp_bound):
-            state = emotions["embarrassed"].id
-        else:
-            if (cpu_percent <= cpu_lvl_1): # Sleep
-                state = emotions["sleep"].id
-            elif (cpu_percent > cpu_lvl_1 and cpu_percent <= cpu_lvl_2): # Waking
-                state = emotions["waking"].id
-            elif (cpu_percent > cpu_lvl_2 and cpu_percent <= cpu_lvl_3): # Awake
+        if (cpu_percent <= cpu_lvl_1): # Sleep
+            state = emotions["sleep"].id
+        elif (cpu_percent > cpu_lvl_1 and cpu_percent <= cpu_lvl_2): # Waking
+            state = emotions["waking"].id
+        elif (cpu_percent > cpu_lvl_2 and cpu_percent <= cpu_lvl_3): # Awake
+            if (cpu_temp > cpu_temp_bound):
+                if (mem_percent > mem_bound): # Hot Variant
+                    state = emotions["reading_hot"].id
+                else:
+                    state = emotions["awake_hot"].id
+            else:
                 if (mem_percent > mem_bound):
                     state = emotions["reading"].id
                 else:
                     state = emotions["awake"].id
-            elif (cpu_percent > cpu_lvl_3): # Rage
+        elif (cpu_percent > cpu_lvl_3): # Rage
+            if (cpu_temp > cpu_temp_bound): # Hot Variant
+                state = emotions["rage_hot"].id
+            else:
                 state = emotions["rage"].id
         time.sleep(util_refresh)
 
