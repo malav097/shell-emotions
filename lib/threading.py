@@ -64,4 +64,4 @@ def emote(thread_name, emotions):
     while True:
         for key, val in emotions.items():
             if (state == val.id):
-                emotions[key].play(frame_time)
+                val.play(frame_time)
