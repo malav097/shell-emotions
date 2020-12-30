@@ -1,9 +1,20 @@
 import time, psutil, sys
 from conf.cfg import *
 from sys import platform
+disable_cpu_temp = False
+handle = None
+if (platform == "win32"):
+    try:
+        import clr
+        from lib.win32_temp import *
+        handle = init_open_hwd_mon()
+    except:
+        disable_cpu_temp = True
+    if (handle == None):
+        disable_cpu_temp = True
 
 
-def get_cpu_temp():
+def get_cpu_temp(handle):
     if (platform == "linux" or platform == "linux2"):
         try:
             temp = psutil.sensors_temperatures()[cpu_temp_sensor]
@@ -15,12 +26,7 @@ def get_cpu_temp():
             avg_cpu_temp = 0
         return avg_cpu_temp
     elif (platform == "win32"):
-        try:
-            w = wmi.WMI(namespace=r'root\wmi')
-            temp = w.MSAcpi_ThermalZoneTemperature()[0].CurrentTemperature
-            cpu_temp = (temp / 10) - 273.15
-        except:
-            cpu_temp = 0
+        cpu_temp = get_cpu_pkg_temp(handle)
         return cpu_temp
     else:
         return 0
@@ -29,19 +35,13 @@ def get_cpu_temp():
 # Method to refresh utilization values
 def state_update(thread_name, emotions):
     global state
-    disable_cpu_temp = False
-    if (platform == "win32"):
-        try:
-            import wmi
-        except:
-            disable_cpu_temp = True
     while True:
         cpu_percent = psutil.cpu_percent(cpu_usage_time)
         mem_percent = psutil.virtual_memory().percent
         if (disable_cpu_temp):
             cpu_temp = 0
         else:
-            cpu_temp = get_cpu_temp()
+            cpu_temp = get_cpu_temp(handle)
         if (cpu_temp > cpu_temp_bound):
             state = emotions["embarrassed"].id
         else:
