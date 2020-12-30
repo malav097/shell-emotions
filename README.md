@@ -1,7 +1,9 @@
 # shell-emotions
-Command line animations based on the state of the system
+Command line animations based on the state of the system for Linux or Windows 10
 
-![](assets/docs/example_eyes.gif)
+![](assets/docs/eyes_example.gif)
+
+**The ascii animations were created using a modified version of [Joedang's converter](https://github.com/Joedang/termimation)**
 
 ## Workflow for getting the ascii frames
 
@@ -13,23 +15,54 @@ Command line animations based on the state of the system
 
 ## Adding Animations
 
- - Take ascii frames numbered from 0-n
- - Place ascii frames in filepath `assets/frames/[insert_animation_name]`
- - Create loop from 0-n that concates filepath with `i` and appends frames to frame array
- - Add state value to represent emotion in `state_update(thread_name):`
- - Add conditional run of animation in `emote(thread_name):` using new frame array
+ - Create ascii frames using above workflow or modified Termimium from https://github.com/avanishsubbiah/termimation-save-frames
+ - Move ascii frames named 0-N to `./assets/frames/<insert_emotion_name>`
+ - Add conditional in `state_update()` in lib.threading that sets `state = emotions["<insert_emotion_name>"].id`
 
 ## Requirements
 
  - Python 2 or 3
  - psutil
- - bash/fish shell (Powershell will NOT work as of now)
+ - Bash, Fish, or Powershell
+ - wmi **Requires Admin Privilages** | (if you want cpu temps on Windows 10)
+
+## Configuration
+
+Configurable Parameters in ./conf/cfg.py:
+
+ - `frames_path` | This is the path of the frames folder where individual folders for each emotion is kept **(Default "./assets/frames/")**
+ - `state` | This is the starting state of the program **(Default 0)**
+ - `welcome_time` | Time (sec) for welcome message **(Default 1)**
+ - `frame_time` | The time before printing next frame **(Default 0.2)**
+ - `util_refresh` | Time inbetween utilization stat refreshes **(Default 5)**
+ - `cpu_lvl_1` | Boundary for low CPU usage **(Default 10)**
+ - `cpu_lvl_2` | Boundary for medium CPU usage **(Default 30)**
+ - `cpu_lvl_3` | Boundary for high CPU usage **(Default 90)**
+ - `cpu_temp_bound` | Boundary for high CPU temperature **(Default 80)**
+ - `cpu_temp_bound` | Sensor to pull CPU Temps from **(Default 'coretemp')**
+ - `mem_bound` | Boundary for high memory usage **(Default 50)**
 
 ## clean.sh
 
 Use clean.sh file for cleaning undesired characters from the ascii frames
 
 ## main.py
+
+### Functions
+
+```
+shutdown(signum, frame):
+```
+
+The shutdown function handles clean shutdown of the program with "Shutting down..." printout.
+
+```
+main():
+```
+
+The main function deals with signal handling and starts both state update and emote threads.
+
+## threading.py
 
 ### Functions
 
@@ -45,14 +78,13 @@ emote(thread_name):
 
 The emote thread is a daemon that runs the correct animation based on `state` continuously.
 
-```
-shutdown(signum, frame):
-```
+## animation.py
 
-The shutdown function handles clean shutdown of the program with "Shutting down..." printout.
+### Classes
 
 ```
-main():
+class Animation:
 ```
 
-The main function deals with signal handling and starts both state update and emote threads.
+The `Animation` class has the properties `name`, `id`, `file_path`, and `frames`. 
+It will fill `frames` list upon initialization using input `file_path` and `name`.
