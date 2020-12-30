@@ -47,19 +47,33 @@ def state_update(thread_name, emotions):
         elif (cpu_percent > cpu_lvl_1 and cpu_percent <= cpu_lvl_2): # Waking
             state = emotions["waking"].id
         elif (cpu_percent > cpu_lvl_2 and cpu_percent <= cpu_lvl_3): # Awake
-            if (cpu_temp > cpu_temp_bound):
-                if (mem_percent > mem_bound): # Hot Variant
+            if (cpu_temp > cpu_temp_lvl_1 and cpu_temp <= cpu_temp_lvl_2): # Hot Variant
+                if (mem_percent > mem_bound):
                     state = emotions["reading_hot"].id
                 else:
                     state = emotions["awake_hot"].id
+            elif (cpu_temp > cpu_temp_lvl_2 and cpu_temp <= cpu_temp_lvl_3): # Hotter Variant
+                if (mem_percent > mem_bound):
+                    state = emotions["reading_hotter"].id
+                else:
+                    state = emotions["awake_hotter"].id
+            elif (cpu_temp > cpu_temp_lvl_3): # Throttle Variant
+                if (mem_percent > mem_bound):
+                    state = emotions["reading_throttle"].id
+                else:
+                    state = emotions["awake_throttle"].id
             else:
                 if (mem_percent > mem_bound):
                     state = emotions["reading"].id
                 else:
                     state = emotions["awake"].id
         elif (cpu_percent > cpu_lvl_3): # Rage
-            if (cpu_temp > cpu_temp_bound): # Hot Variant
+            if (cpu_temp > cpu_temp_lvl_1 and cpu_temp <= cpu_temp_lvl_2): # Hot Variant
                 state = emotions["rage_hot"].id
+            elif (cpu_temp > cpu_temp_lvl_2 and cpu_temp <= cpu_temp_lvl_3): # Hotter Variant
+                state = emotions["rage_hotter"].id
+            elif (cpu_temp > cpu_temp_lvl_3): # Throttle Variant
+                state = emotions["rage_throttle"].id
             else:
                 state = emotions["rage"].id
         time.sleep(util_refresh)
