@@ -1,8 +1,5 @@
-from __future__ import print_function
+import time, psutil, sys
 from conf.cfg import *
-import time
-import psutil
-import sys
 from sys import platform
 
 
@@ -62,18 +59,9 @@ def state_update(thread_name, emotions):
         time.sleep(util_refresh)
 
 
-# Method to print frames given a key
-def print_frames(key, emotions):
-    frames = emotions[key].frames
-    for frame in frames:
-        print('\033c', end="")
-        print("".join(frame))
-        time.sleep(frame_time)
-
-
 # Method to print and update emotion animation
 def emote(thread_name, emotions):
     while True:
         for key, val in emotions.items():
             if (state == val.id):
-                print_frames(key, emotions)
+                emotions[key].play(frame_time)

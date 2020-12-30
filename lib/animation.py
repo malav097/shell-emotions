@@ -1,5 +1,7 @@
+from __future__ import print_function
 from io import open
-import os
+import os, time
+
 
 # Class for animation objects
 class Animation:
@@ -17,3 +19,9 @@ class Animation:
                 f = f.readlines()
                 #append list f to list frames
                 self.frames.append(f)
+
+    def play(self, frame_time):
+        for frame in self.frames:
+            print('\033c', end="")
+            print("".join(frame))
+            time.sleep(frame_time)
