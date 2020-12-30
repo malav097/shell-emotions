@@ -1,4 +1,5 @@
 import clr, time
+from conf.cfg import *
 
 
 def init_open_hwd_mon():

@@ -23,13 +23,13 @@ def get_cpu_temp(handle):
                 temp_list.append(temp[i].current)
             avg_cpu_temp = sum(temp_list)/len(temp_list)
         except:
-            avg_cpu_temp = 0
+            avg_cpu_temp = cpu_temp_default
         return avg_cpu_temp
     elif (platform == "win32"):
         cpu_temp = get_cpu_pkg_temp(handle)
         return cpu_temp
     else:
-        return 0
+        return cpu_temp_default
 
 
 # Method to refresh utilization values
@@ -39,7 +39,7 @@ def state_update(thread_name, emotions):
         cpu_percent = psutil.cpu_percent(cpu_usage_time)
         mem_percent = psutil.virtual_memory().percent
         if (disable_cpu_temp):
-            cpu_temp = 0
+            cpu_temp = cpu_temp_default
         else:
             cpu_temp = get_cpu_temp(handle)
         if (cpu_temp > cpu_temp_bound):

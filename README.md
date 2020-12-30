@@ -54,7 +54,9 @@ Configurable Parameters in ./conf/cfg.py:
  - `cpu_lvl_2` | Boundary for medium CPU usage **(Default 30)**
  - `cpu_lvl_3` | Boundary for high CPU usage **(Default 90)**
  - `cpu_temp_bound` | Boundary for high CPU temperature **(Default 80)**
- - `cpu_temp_bound` | Sensor to pull CPU Temps from **(Default 'coretemp')**
+ - `cpu_temp_sensor` | Sensor to pull CPU Temps from **(Default "coretemp")**
+ - `cpu_temp_sensor_win32` | Sensor to pull CPU temps in win32 from **(Default "CPU Package")**
+ - `cpu_temp_default` | Default fallback CPU temperature **(Default 0)**
  - `mem_bound` | Boundary for high memory usage **(Default 50)**
 
 ## clean.sh
